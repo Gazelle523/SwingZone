@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import ListSimulator from './components/ListSimulator';
 import SearchSimulator from './components/SearchSimulator';
+import ManageListings from './components/ManageListings';
 
 function App() {
-  const [view, setView] = useState(null); // 'search' | 'list' | null
-
-  const goHome = () => setView(null);
+  const [view, setView] = useState(null); // 'search' | 'list' | 'manage' | null
+ 
+  const goHome = () => {
+    setView(null);
+  };
 
   const renderContent = () => {
     if (view === 'search') return <SearchSimulator goHome={goHome} />;
     if (view === 'list') return <ListSimulator goHome={goHome} />;
+    if (view === 'manage') return <ManageListings goHome={goHome} userId={1} />;
 
     return (
       <div style={{ textAlign: 'center', marginTop: '5rem' }}>
@@ -18,6 +22,7 @@ function App() {
         <div style={{ marginTop: '2rem' }}>
           <button onClick={() => setView('search')} style={buttonStyle}>🔍 Search for a Simulator</button>
           <button onClick={() => setView('list')} style={{ ...buttonStyle, marginLeft: '1rem' }}>📋 List Your Simulator</button>
+          <button onClick={() => setView('manage')} style={{ ...buttonStyle, marginLeft: '1rem' }}>🛠 Manage Listings</button>
         </div>
       </div>
     );

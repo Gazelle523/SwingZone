@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const SearchSimulator = ({ goHome }) => {
+  console.log('Rendering SearchSimulator component');
   const [simulators, setSimulators] = useState([]);
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);

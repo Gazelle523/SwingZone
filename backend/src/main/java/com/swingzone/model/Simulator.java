@@ -7,12 +7,16 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Simulator {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String location;
     private double price;
     private String description;
+
+    private Long userId; // 👈 New field
 
     // Getters and Setters
     public Long getId() {
@@ -45,5 +49,13 @@ public class Simulator {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
