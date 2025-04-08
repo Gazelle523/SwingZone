@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const SearchSimulator = () => {
   const [simulators, setSimulators] = useState([]);
   const [location, setLocation] = useState('');
 
   const handleSearch = async () => {
-    try {
-      const response = await axios.get(`/api/simulators?location=${location}`);
-      setSimulators(response.data);
-    } catch (error) {
-      console.error('Error fetching simulators', error);
-      alert('Failed to fetch simulators');
+  // Canned response
+  const cannedResponse = [
+    {
+      location: 'Default Location',
+      price: 0,
+      description: 'This is a default response when no location is provided.'
+    },
+    {
+      location: 'Another Location',
+      price: 25,
+      description: 'Another default response for demonstration purposes.'
     }
-  };
+  ];
+
+  // Set simulators to the canned response
+  setSimulators(cannedResponse);
+};
 
   return (
     <div>

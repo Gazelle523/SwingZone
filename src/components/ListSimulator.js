@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const ListSimulator = () => {
   const [simulator, setSimulator] = useState({
@@ -13,16 +12,10 @@ const ListSimulator = () => {
     setSimulator({ ...simulator, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      // Assuming you have a backend API that handles adding simulators
-      await axios.post('/api/simulators', simulator);
-      alert('Simulator listed successfully!');
-    } catch (error) {
-      console.error('Error listing simulator', error);
-      alert('Failed to list simulator');
-    }
+    // Instead of sending a request, just show a default success message
+    alert('Simulator listed successfully (default response)!');
   };
 
   return (
