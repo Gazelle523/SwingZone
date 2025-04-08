@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ListSimulator = () => {
+const ListSimulator = ({ goHome }) => {
   const [simulator, setSimulator] = useState({
     location: '',
     price: '',
@@ -14,14 +14,16 @@ const ListSimulator = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Instead of sending a request, just show a default success message
     alert('Simulator listed successfully (default response)!');
+    // Optional: clear the form
+    setSimulator({ location: '', price: '', description: '' });
   };
 
   return (
-    <div>
-      <h2>List Your Golf Simulator for Rent</h2>
-      <form onSubmit={handleSubmit}>
+    <div style={{ maxWidth: '500px', margin: 'auto' }}>
+      <button onClick={goHome} style={backButtonStyle}>⬅ Back to Home</button>
+      <h2 style={{ marginTop: '1rem' }}>List Your Golf Simulator for Rent</h2>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <label>
           Location:
           <input
@@ -29,9 +31,9 @@ const ListSimulator = () => {
             name="location"
             value={simulator.location}
             onChange={handleChange}
+            style={inputStyle}
           />
         </label>
-        <br />
         <label>
           Price (per hour):
           <input
@@ -39,22 +41,48 @@ const ListSimulator = () => {
             name="price"
             value={simulator.price}
             onChange={handleChange}
+            style={inputStyle}
           />
         </label>
-        <br />
         <label>
           Description:
           <textarea
             name="description"
             value={simulator.description}
             onChange={handleChange}
+            rows={3}
+            style={{ ...inputStyle, resize: 'vertical' }}
           />
         </label>
-        <br />
-        <button type="submit">List Simulator</button>
+        <button type="submit" style={submitButtonStyle}>List Simulator</button>
       </form>
     </div>
   );
+};
+
+const inputStyle = {
+  width: '100%',
+  padding: '0.5rem',
+  fontSize: '1rem',
+  marginTop: '0.25rem',
+};
+
+const backButtonStyle = {
+  backgroundColor: '#eee',
+  border: '1px solid #ccc',
+  padding: '0.5rem 1rem',
+  cursor: 'pointer',
+  fontSize: '0.9rem',
+};
+
+const submitButtonStyle = {
+  backgroundColor: '#4CAF50',
+  color: 'white',
+  padding: '0.75rem',
+  border: 'none',
+  borderRadius: '4px',
+  fontSize: '1rem',
+  cursor: 'pointer',
 };
 
 export default ListSimulator;
