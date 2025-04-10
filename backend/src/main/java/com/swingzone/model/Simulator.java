@@ -4,27 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "simulators")
 public class Simulator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long simulatorId;
 
     private String location;
     private double price;
     private String description;
 
-    private Long userId; // 👈 New field
+    private Long userId;
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getSimulatorId() {
+        return simulatorId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSimulatorId(Long id) {
+        this.simulatorId = id;
     }
 
     public String getLocation() {

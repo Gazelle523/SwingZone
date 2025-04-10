@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchSimulator = ({ goHome }) => {
-  console.log('Rendering SearchSimulator component');
+  const navigate = useNavigate();
+
   const [simulators, setSimulators] = useState([]);
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,18 +14,21 @@ const SearchSimulator = ({ goHome }) => {
     setError(null);
 
     try {
-      // Call the backend API
       const response = await fetch(`http://localhost:8080/api/simulators`);
       if (!response.ok) {
         throw new Error('Failed to fetch simulators');
       }
       const data = await response.json();
-      setSimulators(data); // Update the state with the fetched data
+      setSimulators(data);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleBookClick = (simId) => {
+    navigate(`/book/${simId}`);
   };
 
   return (
@@ -64,6 +69,12 @@ const SearchSimulator = ({ goHome }) => {
               >
                 <strong>{simulator.location}</strong> - ${simulator.price} per hour
                 <p style={{ marginTop: '0.5rem' }}>{simulator.description}</p>
+                <button
+                  onClick={() => handleBookClick(simulator.simulatorId)}
+                  style={bookButtonStyle}
+                >
+                  Book Now
+                </button>
               </li>
             ))}
           </ul>
@@ -96,6 +107,16 @@ const submitButtonStyle = {
   border: 'none',
   borderRadius: '4px',
   fontSize: '1rem',
+  cursor: 'pointer',
+};
+
+const bookButtonStyle = {
+  marginTop: '0.5rem',
+  backgroundColor: '#007bff',
+  color: 'white',
+  padding: '0.5rem 1rem',
+  border: 'none',
+  borderRadius: '4px',
   cursor: 'pointer',
 };
 
